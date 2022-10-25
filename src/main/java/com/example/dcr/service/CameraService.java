@@ -7,7 +7,7 @@ import java.util.List;
 public interface CameraService {
     List<CameraDto> getFavorites();
 
-    void setFavorite(long id);
+    void setFavorite(long id, boolean isFavorite);
 
     void setRec(long id, boolean isRec);
 }
