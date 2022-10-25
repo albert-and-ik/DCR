@@ -30,12 +30,12 @@ public class CameraServiceImpl implements CameraService {
 
     @Override
     @Transactional
-    public void setFavorite(long id) {
+    public void setFavorite(long id, boolean isFavorite) {
         CameraEntity entity = cameraRepository
                 .findById(id)
                 .orElseThrow();
 
-        entity.setFavorites(true);
+        entity.setFavorites(isFavorite);
 
         cameraRepository.save(entity);
     }
