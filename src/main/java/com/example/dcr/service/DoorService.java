@@ -7,5 +7,5 @@ import java.util.List;
 public interface DoorService {
     List<DoorDto> getFavorites();
 
-    void setFavorite(long id);
+    void setFavorite(long id, boolean isFavorite);
 }
