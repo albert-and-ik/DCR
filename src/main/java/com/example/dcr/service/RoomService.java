@@ -12,4 +12,8 @@ public interface RoomService {
     List<CameraDto> getCamerasFromRoom(long id);
 
     List<DoorDto> getDoorsFromRoom(long id);
+
+    void updateOrCreate(List<String> names);
+
+    long getRoomByNameOrCreate(String name);
 }
