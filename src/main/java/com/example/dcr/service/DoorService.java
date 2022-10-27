@@ -10,4 +10,6 @@ public interface DoorService {
     void setFavorite(long id, boolean isFavorite);
 
     void updateOrCreate(List<DoorDto> dtos);
+
+    List<DoorDto> getDoorEntitiesByRoomId(long id);
 }
