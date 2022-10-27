@@ -4,6 +4,8 @@ package com.example.dcr.controller;
 import com.example.dcr.model.dto.CameraDto;
 import com.example.dcr.model.dto.DoorDto;
 import com.example.dcr.model.dto.RoomDto;
+import com.example.dcr.service.CameraService;
+import com.example.dcr.service.DoorService;
 import com.example.dcr.service.RoomService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -11,7 +13,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @RestController
@@ -21,6 +23,8 @@ import java.util.List;
 public class RoomController {
 
     final RoomService roomService;
+    final CameraService cameraService;
+    final DoorService doorService;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -29,26 +33,26 @@ public class RoomController {
         return roomService.getAll();
     }
 
-    @GetMapping("/{id}/cameras")
+    @GetMapping("/{name}/cameras")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Получить все камеры в комнате", tags = {"Комнаты"})
     public List<CameraDto> getCamerasFromRoom(
             @PathVariable
-            @Positive
-            long id
+            @NotBlank
+            String name
     ) {
-        return roomService.getCamerasFromRoom(id);
+        return cameraService.getCamerasFromRoom(name);
     }
 
-    @GetMapping("/{id}/doors")
+    @GetMapping("/{name}/doors")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Получить все двери в комнате", tags = {"Комнаты"})
     public List<DoorDto> getDoorsFromRoom(
             @PathVariable
-            @Positive
-            long id
+            @NotBlank
+            String name
     ) {
-        return roomService.getDoorsFromRoom(id);
+        return doorService.getDoorByRoomName(name);
     }
 
 }
