@@ -8,4 +8,6 @@ public interface DoorService {
     List<DoorDto> getFavorites();
 
     void setFavorite(long id, boolean isFavorite);
+
+    void updateOrCreate(List<DoorDto> dtos);
 }
