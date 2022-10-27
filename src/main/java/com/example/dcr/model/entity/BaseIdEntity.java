@@ -1,6 +1,5 @@
 package com.example.dcr.model.entity;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,8 +10,10 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class BaseEntity extends IdEntity{
+public abstract class BaseIdEntity extends IdEntity{
 
     @Column(name = "updated_at")
     LocalDateTime updatedAt;
 }
+
+
