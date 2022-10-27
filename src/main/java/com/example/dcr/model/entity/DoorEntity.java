@@ -3,15 +3,23 @@ package com.example.dcr.model.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-@Entity(name="doors")
+@Entity
+@Table(name="doors")
 public class DoorEntity extends BaseEntity{
 
-    @Column(nullable = false)
-    boolean favorites;
+    @NotBlank
+    @Column(name="name")
+    String name;
 
+    @Column(nullable = false, name = "favorites")
+    Boolean favorites;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "room")
+    RoomEntity room;
 }
