@@ -29,11 +29,11 @@ public class RubetekRepositoryConfig {
         return retrofitClient;
     }
 
-    private OkHttpClient getOkHttpClient(){
-        if(okHttpClient==null)
-            new OkHttpClient()
-                    .newBuilder()
-                    .build();
+    private OkHttpClient getOkHttpClient() {
+        if(okHttpClient == null)
+            okHttpClient = new OkHttpClient()
+                                    .newBuilder()
+                                    .build();
 
         return okHttpClient;
     }
