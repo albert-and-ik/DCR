@@ -1,7 +1,6 @@
 package com.example.dcr.schedule;
 
 import com.example.dcr.schedule.task.TaskSyncWithRubetek;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
@@ -15,7 +14,6 @@ import java.time.ZoneOffset;
 
 @Component
 @Slf4j
-@AllArgsConstructor
 public class SyncRubetekSchedule {
 
     final ThreadPoolTaskScheduler threadPoolTaskScheduler;
@@ -23,6 +21,11 @@ public class SyncRubetekSchedule {
 
     @Value("${app.rubetek.sync-cron}")
     String cronValue;
+
+    public SyncRubetekSchedule(ThreadPoolTaskScheduler threadPoolTaskScheduler, TaskSyncWithRubetek taskSyncWithRubetek) {
+        this.threadPoolTaskScheduler = threadPoolTaskScheduler;
+        this.taskSyncWithRubetek = taskSyncWithRubetek;
+    }
 
 
     @PostConstruct
