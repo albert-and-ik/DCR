@@ -5,20 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Column;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class BaseEntity {
+public abstract class BaseEntity extends IdEntity{
 
-    @Id
-    @Column
-    long id;
-
-    @NotBlank
-    @Column
-    String name;
+    @Column(name = "updated_at")
+    LocalDateTime updatedAt;
 }
