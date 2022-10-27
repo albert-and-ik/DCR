@@ -4,11 +4,14 @@ spring:
     username: postgres
     password: root
     driver-class-name: org.postgresql.Driver
-  jps:
+  jpa:
     generate-ddl: true
     hibernate:
       dll-auto: create
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher
-
+app:
+  rubetek:
+    sync-cron: ${SYNC_CRON:"0 */5 * ? * *"}
+    sync-baseUrl: ${SYNC_BASEURL:"http://cars.cprogroup.ru/api/rubetek/"}
