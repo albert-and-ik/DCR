@@ -63,7 +63,7 @@ public class DoorServiceImpl implements DoorService {
                     else {
                         RoomEntity roomEntity = new RoomEntity();
 
-                        roomEntity.setId(roomService.getRoomByName(dto.getRoom()));
+                        roomEntity.setId(roomService.getRoomByNameOrCreate(dto.getRoom()));
 
                         doorEntity.setRoom(roomEntity);
                     }
@@ -75,5 +75,15 @@ public class DoorServiceImpl implements DoorService {
                 .toList();
 
         doorRepository.saveAll(listEntities);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<DoorDto> getDoorEntitiesByRoomId(long id) {
+        return doorRepository
+                .getDoorEntitiesByRoomId(id)
+                .stream()
+                .map(mapper::toDto)
+                .toList();
     }
 }
