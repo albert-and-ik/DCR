@@ -8,4 +8,6 @@ import java.util.List;
 @Repository
 public interface CameraRepository extends  BaseEntityRepository<CameraEntity> {
     List<CameraEntity> getCameraEntitiesByFavoritesIsTrue();
+
+    List<CameraEntity> getCameraEntitiesByRoomName(String name);
 }
