@@ -4,5 +4,5 @@ import com.example.dcr.model.entity.RoomEntity;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RoomRepository extends BaseEntityRepository<RoomEntity>{
+public interface RoomRepository extends EmptyEntityRepository<RoomEntity, String>{
 }
