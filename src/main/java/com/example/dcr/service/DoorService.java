@@ -11,5 +11,5 @@ public interface DoorService {
 
     void updateOrCreate(List<DoorDto> dtos);
 
-    List<DoorDto> getDoorEntitiesByRoomId(long id);
+    List<DoorDto> getDoorByRoomName(String name);
 }

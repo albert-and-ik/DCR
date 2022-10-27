@@ -1,13 +1,13 @@
 package com.example.dcr.service;
 
 import com.example.dcr.model.dto.CameraDto;
-import com.example.dcr.model.entity.CameraEntity;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 public interface CameraService {
-    Stream<CameraEntity> getFavorites();
+    List<CameraDto> getFavorites();
+
+    List<CameraDto> getCamerasFromRoom(String nameRoom);
 
     void setFavorite(long id, boolean isFavorite);
 
