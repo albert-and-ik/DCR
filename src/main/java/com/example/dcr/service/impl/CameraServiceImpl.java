@@ -9,6 +9,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -30,10 +33,9 @@ public class CameraServiceImpl implements CameraService {
                 .toList();
     }
 
-
     @Override
     @Transactional
-    public void setFavorite(long id, boolean isFavorite) {
+    public void setFavorite(@Positive long id, boolean isFavorite) {
         CameraEntity entity = cameraRepository
                 .findById(id)
                 .orElseThrow();
@@ -45,7 +47,7 @@ public class CameraServiceImpl implements CameraService {
 
     @Override
     @Transactional
-    public void setRec(long id, boolean isRec) {
+    public void setRec(@Positive long id, boolean isRec) {
         CameraEntity entity = cameraRepository
                 .findById(id)
                 .orElseThrow();
@@ -58,7 +60,7 @@ public class CameraServiceImpl implements CameraService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<CameraDto> getCamerasFromRoom(String name) {
+    public List<CameraDto> getCamerasFromRoom(@NotBlank String name) {
         return cameraRepository
                 .getCameraEntitiesByRoomName(name)
                 .stream()
@@ -68,7 +70,7 @@ public class CameraServiceImpl implements CameraService {
 
     @Override
     @Transactional
-    public void updateOrCreate(List<CameraDto> dtos) {
+    public void updateOrCreate(@NotEmpty List<CameraDto> dtos) {
 
         LocalDateTime updateTime = LocalDateTime.now();
 
