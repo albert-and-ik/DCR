@@ -10,6 +10,8 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -32,15 +34,15 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     @Transactional
-    public void updateOrCreate(List<String> names) {
+    public void updateOrCreate(@NotEmpty List<String> names) {
         names.forEach(this::getRoomByNameOrCreate);
     }
 
 
     @Override
     @Transactional
-    public @Nullable RoomEntity getRoomByNameOrCreate(String name) {
-        if(name == null || name.equals("null") || name.isEmpty())
+    public @Nullable RoomEntity getRoomByNameOrCreate(@NotBlank String name) {
+        if(name.equals("null"))
             return null;
 
         return roomRepository
