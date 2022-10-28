@@ -1,6 +1,7 @@
 package com.example.dcr.controller;
 
 import com.example.dcr.model.dto.CameraDto;
+import com.example.dcr.model.dto.ResponseBodyDto;
 import com.example.dcr.service.CameraService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -22,9 +23,8 @@ public class CameraController {
     @GetMapping("/favorites")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Получить все избранные камеры", tags = {"Камеры"})
-    public List<CameraDto> getFavorites(){
-
-        return cameraService.getFavorites();
+    public ResponseBodyDto<List<CameraDto>> getFavorites(){
+        return ResponseBodyDto.getTrueSuccess(cameraService.getFavorites());
     }
 
     @PatchMapping("/{id}/setFavorite")
@@ -44,7 +44,6 @@ public class CameraController {
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Запись камеры вкл/выкл", tags = {"Камеры"})
     public HttpStatus setRec(
-
             @PathVariable
             @Positive
             long id,

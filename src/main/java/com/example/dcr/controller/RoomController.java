@@ -3,6 +3,7 @@ package com.example.dcr.controller;
 
 import com.example.dcr.model.dto.CameraDto;
 import com.example.dcr.model.dto.DoorDto;
+import com.example.dcr.model.dto.ResponseBodyDto;
 import com.example.dcr.model.dto.RoomDto;
 import com.example.dcr.service.CameraService;
 import com.example.dcr.service.DoorService;
@@ -29,30 +30,30 @@ public class RoomController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Получить все комнаты", tags = {"Комнаты"})
-    public List<RoomDto> getAll() {
-        return roomService.getAll();
+    public ResponseBodyDto<List<RoomDto>> getAll() {
+        return ResponseBodyDto.getTrueSuccess(roomService.getAll());
     }
 
     @GetMapping("/{name}/cameras")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Получить все камеры в комнате", tags = {"Комнаты"})
-    public List<CameraDto> getCamerasFromRoom(
+    public ResponseBodyDto<List<CameraDto>> getCamerasFromRoom(
             @PathVariable
             @NotBlank
             String name
     ) {
-        return cameraService.getCamerasFromRoom(name);
+        return ResponseBodyDto.getTrueSuccess(cameraService.getCamerasFromRoom(name));
     }
 
     @GetMapping("/{name}/doors")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Получить все двери в комнате", tags = {"Комнаты"})
-    public List<DoorDto> getDoorsFromRoom(
+    public ResponseBodyDto<List<DoorDto>> getDoorsFromRoom(
             @PathVariable
             @NotBlank
             String name
     ) {
-        return doorService.getDoorByRoomName(name);
+        return ResponseBodyDto.getTrueSuccess(doorService.getDoorByRoomName(name));
     }
 
 }

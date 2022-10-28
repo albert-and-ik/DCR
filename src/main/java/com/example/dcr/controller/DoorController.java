@@ -1,6 +1,7 @@
 package com.example.dcr.controller;
 
 import com.example.dcr.model.dto.DoorDto;
+import com.example.dcr.model.dto.ResponseBodyDto;
 import com.example.dcr.service.DoorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,8 +23,8 @@ public class DoorController {
     @GetMapping("/favorites")
     @Operation(summary = "Получить все избранные двери", tags = {"Двери"})
     @ResponseStatus(HttpStatus.OK)
-    public List<DoorDto> getFavoritesDoors() {
-        return doorService.getFavorites();
+    public ResponseBodyDto<List<DoorDto>> getFavoritesDoors() {
+        return ResponseBodyDto.getTrueSuccess(doorService.getFavorites());
     }
 
     @PatchMapping("/{id}/setFavorite")
