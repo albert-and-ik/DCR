@@ -27,7 +27,7 @@ public class CameraServiceImpl implements CameraService {
     @Transactional(readOnly = true)
     public List<CameraDto> getFavorites() {
         return cameraRepository
-                .getCameraEntitiesByFavoritesIsTrue()
+                .getCameraEntitiesByFavorites(true)
                 .stream()
                 .map(CameraDto::toDto)
                 .toList();

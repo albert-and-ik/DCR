@@ -26,7 +26,7 @@ public class DoorServiceImpl implements DoorService {
     @Transactional(readOnly = true)
     public List<DoorDto> getFavorites() {
         return doorRepository
-                .getDoorEntitiesByFavoritesIsTrue()
+                .getDoorEntitiesByFavorites(true)
                 .stream()
                 .map(DoorDto::toDto)
                 .toList();
