@@ -9,6 +9,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -31,7 +34,7 @@ public class DoorServiceImpl implements DoorService {
 
     @Override
     @Transactional
-    public void setFavorite(long id, boolean isFavorite) {
+    public void setFavorite(@Positive long id, boolean isFavorite) {
         DoorEntity entity = doorRepository
                 .findById(id)
                 .orElseThrow();
@@ -43,7 +46,7 @@ public class DoorServiceImpl implements DoorService {
 
     @Override
     @Transactional
-    public void updateOrCreate(List<DoorDto> dtos) {
+    public void updateOrCreate(@NotEmpty List<DoorDto> dtos) {
         LocalDateTime updateTime = LocalDateTime.now();
 
         var listEntities = dtos.
@@ -68,7 +71,7 @@ public class DoorServiceImpl implements DoorService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<DoorDto> getDoorByRoomName(String name) {
+    public List<DoorDto> getDoorByRoomName(@NotBlank String name) {
         return doorRepository
                 .getDoorEntitiesByRoomName(name)
                 .stream()
