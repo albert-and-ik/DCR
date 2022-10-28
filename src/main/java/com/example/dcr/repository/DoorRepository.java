@@ -7,6 +7,6 @@ import java.util.List;
 
 @Repository
 public interface DoorRepository extends BaseEntityRepository<DoorEntity>{
-    List<DoorEntity> getDoorEntitiesByFavoritesIsTrue();
+    List<DoorEntity> getDoorEntitiesByFavorites(boolean favorites);
     List<DoorEntity> getDoorEntitiesByRoomName(String name);
 }
