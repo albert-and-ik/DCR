@@ -1,9 +1,7 @@
 package com.example.dcr.service.impl;
 
-import com.example.dcr.mapper.EntityMapper;
 import com.example.dcr.model.dto.DoorDto;
 import com.example.dcr.model.entity.DoorEntity;
-import com.example.dcr.model.entity.RoomEntity;
 import com.example.dcr.repository.DoorRepository;
 import com.example.dcr.service.DoorService;
 import com.example.dcr.service.RoomService;
@@ -19,7 +17,6 @@ import java.util.List;
 public class DoorServiceImpl implements DoorService {
 
     final DoorRepository doorRepository;
-    final EntityMapper mapper;
     final RoomService roomService;
 
     @Override
@@ -28,7 +25,7 @@ public class DoorServiceImpl implements DoorService {
         return doorRepository
                 .getDoorEntitiesByFavoritesIsTrue()
                 .stream()
-                .map(mapper::toDto)
+                .map(DoorDto::toDto)
                 .toList();
     }
 
@@ -52,21 +49,13 @@ public class DoorServiceImpl implements DoorService {
         var listEntities = dtos.
                 stream()
                 .map(dto -> {
-                    var doorEntity = mapper.toEntity(dto);
+                    var doorEntity = dto.toEntity();
 
-                    if(doorRepository.existsById(dto.getId()))
+                    if(doorRepository.existsById(Long.parseLong(dto.getId())))
                         doorEntity.setFavorites(null);
 
 
-                    if(dto.getRoom().equals("null") || dto.getRoom().isEmpty())
-                        doorEntity.setRoom(null);
-                    else {
-                        RoomEntity roomEntity = new RoomEntity();
-
-                        roomEntity.setId(roomService.getRoomByNameOrCreate(dto.getRoom()));
-
-                        doorEntity.setRoom(roomEntity);
-                    }
+                    doorEntity.setRoom(roomService.getRoomByNameOrCreate(dto.getRoom()));
 
                     doorEntity.setUpdatedAt(updateTime);
 
@@ -79,11 +68,11 @@ public class DoorServiceImpl implements DoorService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<DoorDto> getDoorEntitiesByRoomId(long id) {
+    public List<DoorDto> getDoorByRoomName(String name) {
         return doorRepository
-                .getDoorEntitiesByRoomId(id)
+                .getDoorEntitiesByRoomName(name)
                 .stream()
-                .map(mapper::toDto)
+                .map(DoorDto::toDto)
                 .toList();
     }
 }
