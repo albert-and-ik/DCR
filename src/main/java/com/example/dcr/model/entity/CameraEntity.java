@@ -11,16 +11,16 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @Table(name= "cameras")
-public class CameraEntity extends BaseEntity {
+public class CameraEntity extends BaseIdEntity {
 
-    @Column(name="favorites",nullable = false)
-    Boolean favorites;
+    @Column(name="favorites", nullable = false)
+    boolean favorites;
 
-    @Column(name="rec",nullable = false)
-    Boolean rec;
+    @Column(name="rec", nullable = false)
+    boolean rec;
 
     @NotBlank
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     String name;
 
     @Column(name = "snapshot")

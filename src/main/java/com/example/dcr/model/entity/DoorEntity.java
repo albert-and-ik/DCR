@@ -10,14 +10,18 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @Entity
 @Table(name="doors")
-public class DoorEntity extends BaseEntity{
+public class DoorEntity extends BaseIdEntity {
 
     @NotBlank
     @Column(name="name")
     String name;
 
-    @Column(nullable = false, name = "favorites")
-    Boolean favorites;
+    @Column(name = "favorites", nullable = false)
+    boolean favorites;
+
+
+    @Column(name="snapshot")
+    String snapshot;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room")
