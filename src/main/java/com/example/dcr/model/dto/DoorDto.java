@@ -36,7 +36,10 @@ public class DoorDto {
 
         dto.setId(String.valueOf(entity.getId()));
         dto.setName(entity.getName());
-        dto.setRoom(entity.getRoom().getName());
+
+        if(entity.getRoom()!=null)
+            dto.setRoom(entity.getRoom().getName());
+
         dto.setSnapshot(entity.getSnapshot());
         dto.setFavorites(entity.isFavorites());
 
