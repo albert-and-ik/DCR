@@ -9,11 +9,11 @@ public class CameraDto {
     String id;
     String name;
     String room;
-    Boolean rec;
-    Boolean favorites;
+    boolean rec;
+    boolean favorites;
     String snapshot;
 
-    public CameraEntity toEntity(){
+    public CameraEntity toEntity() {
         CameraEntity entity = new CameraEntity();
 
         entity.setId(Long.parseLong(id));
@@ -22,7 +22,7 @@ public class CameraDto {
         entity.setFavorites(favorites);
         entity.setRec(rec);
 
-        if(room!=null && !room.isEmpty()) {
+        if(room != null && !room.isEmpty()) {
             entity.setRoom(new RoomEntity(room));
         }
 
@@ -38,10 +38,13 @@ public class CameraDto {
 
         dto.setId(String.valueOf(entity.getId()));
         dto.setName(entity.getName());
-        dto.setRoom(entity.getRoom().getName());
+
+        if(entity.getRoom()!=null)
+            dto.setRoom(entity.getRoom().getName());
+
         dto.setSnapshot(entity.getSnapshot());
-        dto.setFavorites(entity.getFavorites());
-        dto.setRec(entity.getRec());
+        dto.setFavorites(entity.isFavorites());
+        dto.setRec(entity.isRec());
 
         return dto;
     }
