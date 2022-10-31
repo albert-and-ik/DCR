@@ -10,7 +10,7 @@ public class DoorDto {
     String room;
     String snapshot;
     String name;
-    Boolean favorites;
+    boolean favorites;
 
 
     public DoorEntity toEntity(){
@@ -28,7 +28,6 @@ public class DoorDto {
         return entity;
     }
 
-
     public static DoorDto toDto(DoorEntity entity){
         if(entity==null)
             return null;
@@ -39,7 +38,7 @@ public class DoorDto {
         dto.setName(entity.getName());
         dto.setRoom(entity.getRoom().getName());
         dto.setSnapshot(entity.getSnapshot());
-        dto.setFavorites(entity.getFavorites());
+        dto.setFavorites(entity.isFavorites());
 
         return dto;
     }
